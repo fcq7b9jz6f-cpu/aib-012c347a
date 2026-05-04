@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كوكب الشرق أم كلثوم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2a2a2a;
+            --text-color: #f0f0f0;
+            --accent-color: #ffd700; /* Gold */
+            --light-gold: #ffeb99;
+            --dark-gold: #c7a100;
+            --header-font: 'Amiri', serif;
+            --body-font: 'Tajawal', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--text-color);
+            background-color: var(--primary-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: var(--header-font);
+            font-size: 3rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        header nav a {
+            color: var(--light-gold);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header nav a:hover {
+            background-color: var(--dark-gold);
+            color: var(--primary-bg);
+        }
+
+        .hero {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        .hero img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4) grayscale(0.2);
+            z-index: -1;
+            transform: scale(1.05);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .hero:hover img {
+            transform: scale(1.03);
+        }
+
+        .hero-content {
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2rem 4rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h2 {
+            font-family: var(--header-font);
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .hero p {
+            font-family: var(--body-font);
+            font-size: 1.8rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--light-gold);
+        }
+
+        section {
+            padding: 4rem 0;
+            background-color: var(--secondary-bg);
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        section h3 {
+            font-family: var(--header-font);
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--dark-gold);
+            border-radius: 2px;
+        }
+
+        .about-content,
+        .quotes-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-content img {
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .about-content img:hover {
+            transform: scale(1.02);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 400px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--f0f0f0);
+        }
+
+        .songs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .song-item {
+            background-color: var(--primary-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .song-item:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .song-item h4 {
+            font-family: var(--header-font);
+            font-size: 1.5rem;
+            color: var(--light-gold);
+            padding: 1rem;
+            background-color: var(--secondary-bg);
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .song-item iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            display: block;
+        }
+
+        .quotes-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .quote-card {
+            background-color: var(--primary-bg);
+            padding: 2rem;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 10px;
+            font-style: italic;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .quote-card:hover {
+            background-color: var(--secondary-bg);
+            border-color: var(--light-gold);
+        }
+
+        .quote-card p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .quote-card footer {
+            text-align: left;
+            font-weight: bold;
+            color: var(--dark-gold);
+            font-family: var(--header-font);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent-color);
+            top: 0;
+            bottom: 0;
+            right: 50%;
+            margin-right: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 0;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-right: 50%;
+            padding-right: 30px;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 50%;
+            padding-left: 30px;
+            text-align: left;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-bg);
+            border: 4px solid var(--light-gold);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background-color: var(--primary-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px) scale(1.02);
+            background-color: var(--secondary-bg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline-content h4 {
+            font-family: var(--header-font);
+            font-size: 1.8rem;
+            color: var(--light-gold);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            color: var(--f0f0f0);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--primary-bg) 100%);
+            color: var(--light-gold);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            border-top: 3px solid var(--dark-gold);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero h2 {
+                font-size: 3.5rem;
+            }
+            .hero p {
+                font-size: 1.5rem;
+            }
+            .timeline::before {
+                right: auto;
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                margin-left: 0;
+                padding-left: 60px;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-right: 0;
+                padding-left: 60px;
+                padding-right: 10px;
+                text-align: left;
+            }
+
+            .timeline-item::after {
+                left: 10px;
+                right: auto;
+            }
+            .timeline-item:nth-child(even)::after {
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+            header nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero {
+                height: 50vh;
+            }
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 1rem;
+            }
+            section h3 {
+                font-size: 2.2rem;
+            }
+            .about-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .about-content img {
+                width: 90%;
+                height: auto;
+                max-width: 300px;
+            }
+            .about-text {
+                min-width: unset;
+            }
+            .songs-grid, .quotes-content, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-content {
+                padding: 1.5rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            section {
+                padding: 2rem 0;
+            }
+            section h3 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>كوكب الشرق</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">الرئيسية</a></li>
+                    <li><a href="#about">حياتها</a></li>
+                    <li><a href="#songs">أغانيها</a></li>
+                    <li><a href="#quotes">اقتباسات</a></li>
+                    <li><a href="#gallery">المرئيات</a></li>
+                    <li><a href="#timeline">الخط الزمني</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <img src="https://images.pexels.com/photos/1108602/pexels-photo-1108602.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="أم كلثوم أيقونة موسيقية">
+            <div class="hero-content">
+                <h2>أم كلثوم</h2>
+                <p>صوت لا يُنسى، سيدة الغناء العربي</p>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h3>نبذة عن حياتها</h3>
+                <div class="about-content">
+                    <img src="https://images.pexels.com/photos/17833433/pexels-photo-17833433.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="أم كلثوم">
+                    <div class="about-text">
+                        <p>أم كلثوم، فاطمة إبراهيم السيد البلتاجي (31 ديسمبر 1898 - 3 فبراير 1975)، هي أيقونة الموسيقى العربية، وواحدة من أعظم المطربات في التاريخ. وُلدت في قرية طماي الزهايرة بالدقهلية، مصر، وبدأت مسيرتها الغنائية في سن مبكرة.</p>
+                        <p>تميزت بصوتها القوي والفريد الذي لا يُضاهى، وقدرتها على التعبير عن أعمق المشاعر الإنسانية. قدمت أم كلثوم العديد من الأغاني الخالدة التي لا تزال تُسمع حتى اليوم، وتُعتبر رمزاً للفن الأصيل والثقافة العربية.</p>
+                        <p>إلى جانب مسيرتها الفنية، كان لأم كلثوم دور بارز في الحياة الثقافية والسياسية المصرية، حيث استخدمت فنها لدعم القضايا الوطنية والعربية. توفيت أم كلثوم في عام 1975 تاركةً إرثاً فنياً غنياً لا يزال يلهم الأجيال.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="songs">
+            <div class="container">
+                <h3>أشهر أغانيها</h3>
+                <div class="songs-grid">
+                    <div class="song-item">
+                        <h4>أنت عمري</h4>
+                        <iframe src="https://www.youtube.com/embed/Syt_8LgYv6c" allowfullscreen></iframe>
+                    </div>
+                    <div class="song-item">
+                        <h4>الأطلال</h4>
+                        <iframe src="https://www.youtube.com/embed/n_0JgGq2B4k" allowfullscreen></iframe>
+                    </div>
+                    <div class="song-item">
+                        <h4>فات الميعاد</h4>
+                        <iframe src="https://www.youtube.com/embed/G2eJ5y2Pq9U" allowfullscreen></iframe>
+                    </div>
+                    <div class="song-item">
+                        <h4>سيرة الحب</h4>
+                        <iframe src="https://www.youtube.com/embed/hO2_9yIEf78" allowfullscreen></iframe>
+                    </div>
+                    <div class="song-item">
+                        <h4>ليلى ونهار</h4>
+                        <iframe src="https://www.youtube.com/embed/2-nS5vW1yM4" allowfullscreen></iframe>
+                    </div>
+                    <div class="song-item">
+                        <h4>ثورة الشك</h4>
+                        <iframe src="https://www.youtube.com/embed/hO2_9yIEf78" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quotes">
+            <div class="container">
+                <h3>اقتباسات خالدة</h3>
+                <div class="quotes-content">
+                    <blockquote class="quote-card">
+                        <p>"لا شيء في الوجود يرفع قدر المرأة مثل الاحترام... ولا شيء يهدم كرامتها مثل استغلال جمالها."</p>
+                        <footer>— أم كلثوم</footer>
+                    </blockquote>
+                    <blockquote class="quote-card">
+                        <p>"كلما كبرت الإنسانية، كلما كبر الفن."</p>
+                        <footer>— أم كلثوم</footer>
+                    </blockquote>
+                    <blockquote class="quote-card">
+                        <p>"أعجب من أناس يبكون أمام القبر، ولا يبكون أمام الصندوق."</p>
+                        <footer>— أم كلثوم</footer>
+                    </blockquote>
+                    <blockquote class="quote-card">
+                        <p>"الغناء عندي ليس حرفة بل رسالة، والحب عندي ليس عِشرة بل حياة."</p>
+                        <footer>— أم كلثوم</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="container">
+                <h3>معرض صور</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/27132499/pexels-photo-27132499.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="أم كلثوم صورة 1"></div>
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/5973417/pexels-photo-5973417.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="أم كلثوم صورة 2"></div>
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/18591954/pexels-photo-18591954.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="أم كلثوم صورة 3"></div>
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/10757077/pexels-photo-10757077.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="أم كلثوم صورة 4"></div>
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/32633205/pexels-photo-32633205.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="أم كلثوم صورة 5"></div>
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/1108601/pexels-photo-1108601.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="أم كلثوم صورة 6"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline">
+            <div class="container">
+                <h3>أهم المحطات في حياتها</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>1898: الميلاد</h4>
+                            <p>وُلدت فاطمة إبراهيم السيد البلتاجي في قرية طماي الزهايرة، محافظة الدقهلية، مصر.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>1910s: بداية المسيرة</h4>
+                            <p>بدأت الغناء في الموالد والاحتفالات الدينية مع والدها، واكتسبت شهرة محلية.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>1920s: الانتقال للقاهرة</h4>
+                            <p>انتقلت إلى القاهرة وبدأت مسيرتها الاحترافية، لتتعرف على كبار الملحنين والشعراء.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>1930s-1940s: ذروة المجد</h4>
+                            <p>حققت نجاحاً هائلاً وأصبحت النجمة الأولى في العالم العربي، وقدمت العديد من أغانيها الخالدة.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>1950s-1960s: حفلات الخميس الأول</h4>
+                            <p>اشتهرت بحفلاتها الشهرية في الخميس الأول من كل شهر، والتي كانت تبث إذاعياً وتنتظرها الجماهير بشغف.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>1975: الرحيل</h4>
+                            <p>توفيت أم كلثوم في 3 فبراير 1975، تاركةً وراءها إرثاً فنياً عظيماً وذكرى خالدة في قلوب الملايين.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 موقع تكريمي لأم كلثوم. كل الحقوق محفوظة.</p>
+            <p>Photos from Pexels.</p>
+            <p>تصميم بلمسة من الذهب والجمال.</p>
+        </div>
+    </footer>
+</body>
+</html>
